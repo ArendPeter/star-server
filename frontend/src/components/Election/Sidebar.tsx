@@ -31,6 +31,7 @@ export default function Sidebar() {
                 <Box
                     display='flex'
                     justifyContent="center"
+                    flexGrow='1'
                     alignItems="center"
                     sx={{ width: '100%' }}>
                     <Paper elevation={3} sx={{ width: 600 }} >

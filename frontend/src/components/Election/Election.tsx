@@ -7,7 +7,7 @@ import Admin from './Admin/Admin'
 import ViewElectionResults from './Results/ViewElectionResults'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Sidebar from "./Sidebar";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Thanks from "./Voting/Thanks";
 import ViewBallot from "./Admin/ViewBallot";
 import { ElectionContextProvider } from "../ElectionContextProvider";
@@ -17,11 +17,9 @@ const Election = () => {
 
   return (
     <ElectionContextProvider id={id} >
-      <Grid container sx={{ mt: { xs: 0, sm: 5 } }}>
-        <Grid item xs={12} sm={2}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={12} sm={10}>
+      <Box display='flex' flexDirection='row'>
+        <Sidebar />
+        <Box flexGrow='0' sx={{margin: 'auto'}}>
           <Routes>
             <Route path='/' element={<ElectionHome />} />
             <Route path='/vote' element={<VotePage />} />
@@ -32,8 +30,8 @@ const Election = () => {
             <Route path='/ballot/:ballot_id' element={<ViewBallot ballot={null} onClose={null} />} />
             <Route path='/id/:voter_id' element={<ElectionHome />} />
           </Routes>
-        </Grid>
-      </Grid >
+        </Box>
+      </Box>
     </ElectionContextProvider>
   )
 }
