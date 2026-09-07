@@ -5,13 +5,15 @@ import EditRoles from './EditRoles';
 import AdminHome from './AdminHome';
 import WriteInApproval from './WriteInApproval';
 import { Box, Typography } from '@mui/material';
+import { ReactNode } from 'react';
 import Races from '~/components/ElectionForm/Races/Races';
 import useElection from '~/components/ElectionContextProvider';
 import TemporaryAccessWarning from '../TemporaryAccessWarning';
 import ElectionSettings from './ElectionSettings';
 import PublishAndShare from './PublishAndShare';
+import Prototype1601UploadBallots from '../Upload/Prototype1601UploadBallots';
 
-const AdminPage = ({title, children}) => {
+const AdminPage = ({title, children}: {title: string, children: ReactNode}) => {
     const {election} = useElection();
     return <Box sx={{ width: '100%', maxWidth: 800, margin: 'auto', display: "flex", justifyContent: "flex-start", alignItems: "flex-start", flexDirection: "column", gap: 4 }}>
         <Box sx={{ml: 0, mr: 'auto'}}>
@@ -25,7 +27,7 @@ const AdminPage = ({title, children}) => {
 
 const Admin = () => {
     const { id } = useParams();
-    const {election} = useElection();
+    useElection();
     return (
         <Container>
             <Routes>
@@ -36,6 +38,8 @@ const Admin = () => {
                 <Route path='/writeins/:raceId' element={<WriteInApproval />} />
                 <Route path='/settings' element={<AdminPage title='Settings'><ElectionSettings/></AdminPage>} />
                 <Route path='/publish' element={<AdminPage title='Publish & Share'><PublishAndShare/></AdminPage>} />
+                {/* PROTOTYPE (wayfinder #1601) — throwaway route, remove once resolved */}
+                <Route path='/prototype_upload_ballots' element={<AdminPage title='Upload Ballots (Prototype)'><Prototype1601UploadBallots/></AdminPage>} />
             </Routes>
         </Container>
     )
